@@ -25,7 +25,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
 .timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px; background: #ddd; }
 .item { position: relative; margin-bottom: 8px; background: #fff; border: 0.5px solid #e0e0da; border-radius: 8px; padding: 8px 10px; }
 .item::before { content: ''; position: absolute; left: -24px; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: #fff; border: 1.5px solid #bbb; }
-.item.transport { border-left: 3px solid #378ADD; }
+.item.transport { background: none; border: none; border-radius: 0; padding: 0; }
+.item.transport::before { display: none; }
+.transport-stop { background: #fff; border: 0.5px solid #b8d0ea; border-left: 3px solid #378ADD; border-radius: 8px; padding: 8px 10px; }
+.transport-connector { height: 52px; position: relative; }
+.transport-connector::before { content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 3px; height: calc(100% - 8px - 8px - 16px); background: #378ADD; }
+.transport-connector::after { content: ''; position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 16px solid #378ADD; }
+.transport-note { font-size: 11px; color: #999; margin-top: 5px; padding-left: 2px; }
+.transport-time { position: absolute; left: calc(50% + 16px); top: 50%; transform: translateY(-50%); font-size: 11px; color: #888; white-space: nowrap; }
 .item.sightseeing { border-left: 3px solid #1D9E75; }
 .item.food { border-left: 3px solid #EF9F27; }
 .item.hotel { border-left: 3px solid #7F77DD; }
@@ -72,10 +79,17 @@ a.map-link:active { opacity: 0.7; }
   <div class="day-label">4/27 (月)</div>
   <div class="timeline">
     <div class="item transport">
-      <div class="item-time">18:15 JST</div>
-      <div class="item-title">成田発 EY801</div>
-      <div class="item-note">アブダビ経由 → ミラノへ</div>
-      <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Narita+International+Airport" target="_blank">&#128205; 成田国際空港</a></div>
+      <div class="transport-stop">
+        <div class="item-time">18:15</div>
+        <div class="item-title">成田</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Narita+International+Airport" target="_blank">&#128205; 成田国際空港</a></div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">14h</span></div>
+      <div class="transport-stop">
+        <div class="item-time">翌朝</div>
+        <div class="item-title">ミラノ</div>
+      </div>
+      <div class="transport-note">EY801 / アブダビ経由</div>
     </div>
   </div>
 </div>
@@ -88,12 +102,14 @@ a.map-link:active { opacity: 0.7; }
   <div class="day-label">4/28 (火) — ミラノ着 → ローマへ</div>
   <div class="timeline">
     <div class="item transport">
-      <div class="item-time">6:45</div>
-      <div class="item-title">ミラノ着 EY81</div>
-      <div class="item-note">荷物はミラノ中央駅のコインロッカーへ</div>
-      <div class="item-footer">
-        <a class="map-link" href="https://maps.google.com/?q=Milan+Malpensa+Airport" target="_blank">&#128205; MXP空港</a>
-        <a class="map-link" href="https://maps.google.com/?q=Milano+Centrale+Station" target="_blank">&#128205; ミラノ中央駅</a>
+      <div class="transport-stop">
+        <div class="item-time">6:45</div>
+        <div class="item-title">ミラノ 着</div>
+        <div class="item-note">EY81 / 荷物はミラノ中央駅のコインロッカーへ</div>
+        <div class="item-footer">
+          <a class="map-link" href="https://maps.google.com/?q=Milan+Malpensa+Airport" target="_blank">&#128205; MXP空港</a>
+          <a class="map-link" href="https://maps.google.com/?q=Milano+Centrale+Station" target="_blank">&#128205; ミラノ中央駅</a>
+        </div>
       </div>
     </div>
     <div class="item sightseeing">
@@ -106,11 +122,16 @@ a.map-link:active { opacity: 0.7; }
       </div>
     </div>
     <div class="item transport">
-      <div class="item-time">11:15 → 14:30</div>
-      <div class="item-title">ミラノ中央駅発 → ローマ・テルミニ着</div>
-      <div class="item-footer">
-        <a class="map-link" href="https://maps.google.com/?q=Milano+Centrale+Station" target="_blank">&#128205; ミラノ中央駅</a>
-        <a class="map-link" href="https://maps.google.com/?q=Roma+Termini+Station" target="_blank">&#128205; ローマ・テルミニ</a>
+      <div class="transport-stop">
+        <div class="item-time">11:15</div>
+        <div class="item-title">ミラノ中央駅</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Milano+Centrale+Station" target="_blank">&#128205; ミラノ中央駅</a></div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">3h15m</span></div>
+      <div class="transport-stop">
+        <div class="item-time">14:30</div>
+        <div class="item-title">ローマ・テルミニ</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Roma+Termini+Station" target="_blank">&#128205; ローマ・テルミニ</a></div>
       </div>
     </div>
   </div>
@@ -216,11 +237,16 @@ a.map-link:active { opacity: 0.7; }
       <div class="item-title">ランチ</div>
     </div>
     <div class="item transport">
-      <div class="item-time">12:55 → 14:31</div>
-      <div class="item-title">ローマ発 → フィレンツェ・SMN着</div>
-      <div class="item-footer">
-        <a class="map-link" href="https://maps.google.com/?q=Roma+Termini+Station" target="_blank">&#128205; ローマ・テルミニ</a>
-        <a class="map-link" href="https://maps.google.com/?q=Firenze+Santa+Maria+Novella+Station" target="_blank">&#128205; フィレンツェSMN</a>
+      <div class="transport-stop">
+        <div class="item-time">12:55</div>
+        <div class="item-title">ローマ・テルミニ</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Roma+Termini+Station" target="_blank">&#128205; ローマ・テルミニ</a></div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">1h35m</span></div>
+      <div class="transport-stop">
+        <div class="item-time">14:31</div>
+        <div class="item-title">フィレンツェSMN</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Firenze+Santa+Maria+Novella+Station" target="_blank">&#128205; フィレンツェSMN</a></div>
       </div>
     </div>
   </div>
@@ -296,9 +322,11 @@ a.map-link:active { opacity: 0.7; }
   <div class="day-label">5/2 (土) — トスカーナ田園ドライブ</div>
   <div class="timeline">
     <div class="item transport">
-      <div class="item-time">10:00</div>
-      <div class="item-title">フィレンツェ空港 レンタカー受取</div>
-      <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Florence+Airport+Amerigo+Vespucci" target="_blank">&#128205; フィレンツェ空港</a></div>
+      <div class="transport-stop">
+        <div class="item-time">10:00</div>
+        <div class="item-title">フィレンツェ空港 — レンタカー受取</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Florence+Airport+Amerigo+Vespucci" target="_blank">&#128205; フィレンツェ空港</a></div>
+      </div>
     </div>
     <div class="item sightseeing">
       <div class="item-time">〜夕方</div>
@@ -326,17 +354,24 @@ a.map-link:active { opacity: 0.7; }
   <div class="day-label">5/3 (日) — ヴェネツィアへ</div>
   <div class="timeline">
     <div class="item transport">
-      <div class="item-time">〜13:00</div>
-      <div class="item-title">フィレンツェ空港 レンタカー返却</div>
-      <div class="item-note">返却は15:00まで。余裕を持って13時着を目標に</div>
-      <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Florence+Airport+Amerigo+Vespucci" target="_blank">&#128205; フィレンツェ空港</a></div>
+      <div class="transport-stop">
+        <div class="item-time">〜13:00</div>
+        <div class="item-title">フィレンツェ空港 — レンタカー返却</div>
+        <div class="item-note">返却は15:00まで。余裕を持って13時着を目標に</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Florence+Airport+Amerigo+Vespucci" target="_blank">&#128205; フィレンツェ空港</a></div>
+      </div>
     </div>
     <div class="item transport">
-      <div class="item-time">16:20 → 18:35</div>
-      <div class="item-title">フィレンツェSMN発 → ヴェネツィア・サンタルチア着</div>
-      <div class="item-footer">
-        <a class="map-link" href="https://maps.google.com/?q=Firenze+Santa+Maria+Novella+Station" target="_blank">&#128205; フィレンツェSMN</a>
-        <a class="map-link" href="https://maps.google.com/?q=Venezia+Santa+Lucia+Station" target="_blank">&#128205; ヴェネツィアSL駅</a>
+      <div class="transport-stop">
+        <div class="item-time">16:20</div>
+        <div class="item-title">フィレンツェSMN</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Firenze+Santa+Maria+Novella+Station" target="_blank">&#128205; フィレンツェSMN</a></div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">2h15m</span></div>
+      <div class="transport-stop">
+        <div class="item-time">18:35</div>
+        <div class="item-title">ヴェネツィア・サンタルチア</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Venezia+Santa+Lucia+Station" target="_blank">&#128205; ヴェネツィアSL駅</a></div>
       </div>
     </div>
     <div class="item hotel">
@@ -391,11 +426,16 @@ a.map-link:active { opacity: 0.7; }
       </div>
     </div>
     <div class="item transport">
-      <div class="item-time">13:57 → 16:25</div>
-      <div class="item-title">ヴェネツィア発 → ミラノ中央着</div>
-      <div class="item-footer">
-        <a class="map-link" href="https://maps.google.com/?q=Venezia+Santa+Lucia+Station" target="_blank">&#128205; ヴェネツィアSL駅</a>
-        <a class="map-link" href="https://maps.google.com/?q=Milano+Centrale+Station" target="_blank">&#128205; ミラノ中央駅</a>
+      <div class="transport-stop">
+        <div class="item-time">13:57</div>
+        <div class="item-title">ヴェネツィア・サンタルチア</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Venezia+Santa+Lucia+Station" target="_blank">&#128205; ヴェネツィアSL駅</a></div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">2h30m</span></div>
+      <div class="transport-stop">
+        <div class="item-time">16:25</div>
+        <div class="item-title">ミラノ中央駅</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Milano+Centrale+Station" target="_blank">&#128205; ミラノ中央駅</a></div>
       </div>
     </div>
   </div>
@@ -455,15 +495,29 @@ a.map-link:active { opacity: 0.7; }
   <div class="day-label">5/7 (木) — 帰国</div>
   <div class="timeline">
     <div class="item transport">
-      <div class="item-time">8:00〜9:30</div>
-      <div class="item-title">マルペンサ空港(MXP)へ</div>
-      <div class="item-note">中央駅から Malpensa Express で約50分。9:30には到着を</div>
-      <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Milan+Malpensa+Airport" target="_blank">&#128205; MXP空港</a></div>
+      <div class="transport-stop">
+        <div class="item-time">8:00</div>
+        <div class="item-title">ミラノ中央駅</div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">50m</span></div>
+      <div class="transport-stop">
+        <div class="item-time">9:30</div>
+        <div class="item-title">マルペンサ空港(MXP)</div>
+        <div class="item-note">Malpensa Express で50m</div>
+        <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Milan+Malpensa+Airport" target="_blank">&#128205; MXP空港</a></div>
+      </div>
     </div>
     <div class="item transport">
-      <div class="item-time">11:40</div>
-      <div class="item-title">ミラノMXP発 EY82</div>
-      <div class="item-note">アブダビ経由 → 翌朝 成田着</div>
+      <div class="transport-stop">
+        <div class="item-time">11:40</div>
+        <div class="item-title">ミラノ(MXP)</div>
+      </div>
+      <div class="transport-connector"><span class="transport-time">14h</span></div>
+      <div class="transport-stop">
+        <div class="item-time">翌朝</div>
+        <div class="item-title">成田</div>
+      </div>
+      <div class="transport-note">EY82 / アブダビ経由</div>
     </div>
   </div>
 </div>
