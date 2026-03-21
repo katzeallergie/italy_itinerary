@@ -38,6 +38,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
 .item.hotel { border-left: 3px solid #7F77DD; }
 .item.ticket { border-left: 3px solid #D85A30; }
 .item.tbd { border-left: 3px dashed #bbb; opacity: 0.8; }
+.item.free-time { background: #f8f7f1; border: 0.5px dashed #c0ba9f; border-left: 3px dashed #a89f7c; }
+.item.free-time .item-time { color: #9a9278; }
+.item.free-time .item-title { color: #7a7055; font-size: 13px; }
 .item-time { font-size: 11px; color: #888; margin-bottom: 2px; }
 .item-title { font-size: 14px; color: #1a1a18; font-weight: 400; line-height: 1.4; }
 .item-note { font-size: 12px; color: #666; margin-top: 3px; line-height: 1.5; }
@@ -63,6 +66,14 @@ a.map-link:active { opacity: 0.7; }
 .city-nav-btn { display: inline-flex; align-items: center; gap: 5px; padding: 5px 11px; border-radius: 20px; font-size: 12px; white-space: nowrap; border: 0.5px solid #e0e0da; background: #f5f4f0; color: #555; cursor: pointer; flex-shrink: 0; transition: background 0.18s, color 0.18s, border-color 0.18s; -webkit-tap-highlight-color: transparent; font-family: inherit; }
 .city-nav-btn.active { background: #1a1a18; color: #fff; border-color: #1a1a18; }
 .city-nav-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+/* Free time toggle */
+.hide-free-time .item.free-time { display: none; }
+#freeTimeToggle { display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px 2px 6px; border-radius: 20px; border: 0.5px solid #c0ba9f; background: #f8f7f1; color: #7a7055; font-size: 12px; font-family: inherit; cursor: pointer; transition: background 0.18s, color 0.18s, border-color 0.18s; -webkit-tap-highlight-color: transparent; }
+#freeTimeToggle:active { opacity: 0.7; }
+#freeTimeToggle.off { background: #f5f4f0; border-color: #ddd; color: #bbb; }
+#freeTimeToggle .ft-dot { width: 10px; height: 3px; border-radius: 2px; flex-shrink: 0; background: repeating-linear-gradient(90deg, #a89f7c 0 3px, transparent 3px 6px); transition: opacity 0.18s; }
+#freeTimeToggle.off .ft-dot { opacity: 0.3; }
+#freeTimeToggle .ft-check { font-size: 10px; }
 /* Today highlight */
 .city-header { scroll-margin-top: 120px; }
 .day-block.is-today { scroll-margin-top: 120px; }
@@ -89,6 +100,7 @@ a.map-link:active { opacity: 0.7; }
   <div class="legend-item"><div class="legend-dot" style="background:#EF9F27"></div>食事</div>
   <div class="legend-item"><div class="legend-dot" style="background:#7F77DD"></div>ホテル</div>
   <div class="legend-item"><div class="legend-dot" style="background:#D85A30"></div>予約済みチケット</div>
+  <button id="freeTimeToggle" onclick="toggleFreeTime()"><span class="ft-dot"></span><span id="freeTimeLabel">自由時間</span><span class="ft-check">✓</span></button>
 </div>
 
 <div class="section-divider">出発</div>
@@ -129,9 +141,9 @@ a.map-link:active { opacity: 0.7; }
         </div>
       </div>
     </div>
-    <div class="item sightseeing">
-      <div class="item-time">7:30〜10:30</div>
-      <div class="item-title">ミラノ軽観光</div>
+    <div class="item free-time">
+      <div class="item-time">7:30〜10:30 ｜ 約3時間</div>
+      <div class="item-title">自由時間</div>
       <div class="item-note">ドゥオモ広場・ガッレリア朝散歩、バールでエスプレッソ</div>
       <div class="item-footer">
         <a class="map-link" href="https://maps.google.com/?q=Duomo+di+Milano" target="_blank">&#128205; ドゥオモ</a>
@@ -214,6 +226,11 @@ a.map-link:active { opacity: 0.7; }
       <div class="item-note">ヴァチカン周辺 or テスタッチョ地区へ移動</div>
       <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Testaccio+Rome" target="_blank">&#128205; テスタッチョ地区</a></div>
     </div>
+    <div class="item free-time">
+      <div class="item-time">〜14:30 ｜ 約2時間</div>
+      <div class="item-title">自由時間</div>
+      <div class="item-note">テスタッチョ地区でのんびり。カフェ・市場めぐりや昼寝も</div>
+    </div>
     <div class="item ticket">
       <div class="item-time">14:30〜17:00</div>
       <div class="item-title">コロッセオ・フォロ・ロマーノ <span class="badge badge-warn">要予約</span></div>
@@ -228,6 +245,11 @@ a.map-link:active { opacity: 0.7; }
       <div class="item-title">ヴィットーリオ・エマヌエーレ記念堂（夕日）</div>
       <div class="item-note">テラスからローマ全景。無料エリアあり・有料エレベーターも</div>
       <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Altare+della+Patria+Rome" target="_blank">&#128205; 記念堂</a></div>
+    </div>
+    <div class="item free-time">
+      <div class="item-time">17:30〜19:30 ｜ 約2時間</div>
+      <div class="item-title">自由時間</div>
+      <div class="item-note">テヴェレ川沿いや旧市街を気ままに散策。ジェラートを食べながら</div>
     </div>
     <div class="item food">
       <div class="item-time">19:30〜</div>
@@ -320,6 +342,11 @@ a.map-link:active { opacity: 0.7; }
       <div class="item-note">中央市場（メルカート・チェントラーレ）がおすすめ</div>
       <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Mercato+Centrale+Florence" target="_blank">&#128205; 中央市場</a></div>
     </div>
+    <div class="item free-time">
+      <div class="item-time">〜15:00 ｜ 約2時間</div>
+      <div class="item-title">自由時間</div>
+      <div class="item-note">サン・ロレンツォ地区を散策、革市場や路地裏カフェなど</div>
+    </div>
     <div class="item ticket">
       <div class="item-time">15:00〜17:00</div>
       <div class="item-title">Giotto Pass（ドゥオモ）<span class="badge badge-ok">予約済</span></div>
@@ -328,6 +355,11 @@ a.map-link:active { opacity: 0.7; }
         <a class="map-link" href="https://maps.google.com/?q=Florence+Cathedral+Duomo" target="_blank">&#128205; ドゥオモ</a>
         <a class="map-link" href="https://maps.google.com/?q=Giottos+Campanile+Florence" target="_blank">&#128205; ジョットの鐘楼</a>
       </div>
+    </div>
+    <div class="item free-time">
+      <div class="item-time">17:00〜19:30 ｜ 約2時間半</div>
+      <div class="item-title">自由時間</div>
+      <div class="item-note">ヴェッキオ橋周辺でショッピング、カフェでひと休みなど</div>
     </div>
     <div class="item food">
       <div class="item-time">19:30〜</div>
@@ -377,6 +409,11 @@ a.map-link:active { opacity: 0.7; }
         <div class="item-note">返却は15:00まで。余裕を持って13時着を目標に</div>
         <div class="item-footer"><a class="map-link" href="https://maps.google.com/?q=Florence+Airport+Amerigo+Vespucci" target="_blank">&#128205; フィレンツェ空港</a></div>
       </div>
+    </div>
+    <div class="item free-time">
+      <div class="item-time">13:00〜16:20 ｜ 約3時間</div>
+      <div class="item-title">自由時間</div>
+      <div class="item-note">空港周辺でのんびり or フィレンツェ中心部に戻って最後の散策も</div>
     </div>
     <div class="item transport">
       <div class="transport-stop">
@@ -542,6 +579,15 @@ a.map-link:active { opacity: 0.7; }
 <div style="height:2rem;"></div>
 </div>
 <script>
+// Free time toggle
+function toggleFreeTime() {
+  const hidden = document.body.classList.toggle('hide-free-time');
+  const btn = document.getElementById('freeTimeToggle');
+  const check = btn.querySelector('.ft-check');
+  btn.classList.toggle('off', hidden);
+  check.textContent = hidden ? '–' : '✓';
+}
+
 // City quick-jump
 document.querySelectorAll('.city-nav-btn').forEach(btn => {
   btn.addEventListener('click', () => {
