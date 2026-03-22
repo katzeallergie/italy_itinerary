@@ -15,16 +15,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
 .legend { display: flex; flex-wrap: wrap; gap: 10px; padding: 0.75rem 1rem; background: #fff; border-radius: 10px; margin-bottom: 1rem; border: 0.5px solid #e0e0da; }
 .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
 .legend-dot { width: 10px; height: 3px; border-radius: 2px; }
-.city-header { display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; border-radius: 10px; margin: 1.5rem 0 0.5rem; background: #fff; border: 0.5px solid #e0e0da; }
+.city-header { display: flex; align-items: center; gap: 10px; padding: 0.75rem 1rem; border-radius: 10px; margin: 2rem 0 0.5rem; background: #fff; border: 0.5px solid #e0e0da; }
 .city-header h2 { font-size: 15px; font-weight: 500; }
 .city-header .dates { font-size: 12px; color: #888; margin-left: auto; }
 .city-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.day-block { margin: 0 0 0.5rem; }
-.day-label { font-size: 12px; font-weight: 500; color: #888; padding: 0.5rem 0 0.25rem; letter-spacing: 0.03em; }
+.day-block { margin: 0 0 1.25rem; }
+.day-label { font-size: 13px; font-weight: 600; color: #888; padding: 0.65rem 0 0.3rem; letter-spacing: 0.04em; }
 .timeline { position: relative; padding-left: 28px; }
 .timeline::before { content: ''; position: absolute; left: 7px; top: 6px; bottom: 6px; width: 1px; background: #ddd; }
 .item { position: relative; margin-bottom: 8px; background: #fff; border: 0.5px solid #e0e0da; border-radius: 8px; padding: 8px 10px; }
 .item::before { content: ''; position: absolute; left: -24px; top: 11px; width: 8px; height: 8px; border-radius: 50%; background: #fff; border: 1.5px solid #bbb; }
+.item.sightseeing::before { border-color: #1D9E75; }
+.item.food::before { border-color: #EF9F27; }
+.item.hotel::before { border-color: #7F77DD; }
+.item.practical::before { border-color: #E05C5C; }
+.item.ticket::before { border-color: #D85A30; }
+.item.free-time::before { border-color: #a89f7c; }
 .item.transport { background: none; border: none; border-radius: 0; padding: 0; }
 .item.transport::before { display: none; }
 .transport-stop { background: #fff; border: 0.5px solid #b8d0ea; border-left: 3px solid #378ADD; border-radius: 8px; padding: 8px 10px; }
@@ -44,7 +50,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-se
 .item.free-time .item-title { color: #7a7055; font-size: 13px; }
 .item-time { font-size: 11px; color: #888; margin-bottom: 2px; }
 .item-title { font-size: 14px; color: #1a1a18; font-weight: 400; line-height: 1.4; }
-.item-note { font-size: 12px; color: #666; margin-top: 3px; line-height: 1.5; }
+.item-note { font-size: 12px; color: #777; margin-top: 4px; line-height: 1.6; }
 .item-footer { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
 .badge { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 4px; }
 .badge-warn { background: #FAEEDA; color: #854F0B; }
